@@ -1,51 +1,33 @@
 const express = require('express');
 const axios = require('axios');
-// const auth = require('../config');
+const db = require('../db/index.js');
 
 const app = express();
 const PORT = 3000 || process.env.PORT;
 
-// app.use(express.static('client/dist'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ extended: true }));
 
-// const headers = { authorization: auth.key };
-// const baseUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp';
-
-// GET ALL PRODUCTS
-// app.get('/api/all_products', (req, res) => {
-//   axios({
-//     method: 'GET',
-//     url: `${baseUrl}/products/`,
-//     headers,
-//   }).then((axiosResponse) => res.send(axiosResponse.data));
-// });
-
-// GET PRODUCT
-// app.get('/api/product', (req, res) => {
-//   axios({
-//     method: 'GET',
-//     url: `${baseUrl}/products/${req.query.product_id}`,
-//     headers,
-//   }).then((axiosResponse) => res.send(axiosResponse.data));
-// });
-
 
 //------------------------------------------------------------------------------
+const sendResponse = function(err, data, res) {
+  err ?
+    res.status(500).send(err) :
+    res.status(200).send(data);
+}
 
 // GET QUESTIONS
 app.get('/shopdata/qa/questions', (req, res) => {
-  res.send('here-a we go!');
-  // query questions table for questions matching product_id param
-  // limit count based on page and count params
-  // write returned data as JSON to res.body (res.send(JSON))
+  const params = { product_id: req.query.product_id };
+  db.getQuestions(params,
+    (err, data) => sendResponse(err, data, res));
 });
 
 // GET ANSWERS
 app.get('/shopdata/qa/answers', (req, res) => {
-  // query answers table for answers matching question_id param
-  // limit count based on page and count params
-  // write returned data as JSON to res.body (res.send(JSON))
+  const params = { question_id: req.query.question_id };
+  db.getAnswers(params,
+    (err, data) => sendResponse(err, data, res));
 });
 
 // MARK QUESTION AS HELPFUL
