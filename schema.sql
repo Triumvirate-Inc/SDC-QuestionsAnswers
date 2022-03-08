@@ -42,6 +42,10 @@ CREATE TABLE photos (
 
 
 ALTER TABLE photos ADD CONSTRAINT photos_pkey PRIMARY KEY (id);
-
 ALTER TABLE answers ADD CONSTRAINT answers_id_questions_fkey FOREIGN KEY (id_questions) REFERENCES questions(id);
 ALTER TABLE photos ADD CONSTRAINT photos_id_answers_fkey FOREIGN KEY (id_answers) REFERENCES answers(id);
+
+
+CREATE INDEX product_index ON questions (product_id);
+CREATE INDEX question_index ON answers (id_questions);
+CREATE INDEX answer_index ON photos (id_answers);
