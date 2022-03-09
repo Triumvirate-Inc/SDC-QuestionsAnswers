@@ -139,3 +139,13 @@ module.exports.postQuestion = async function(params, callback) {
   `;
   callback(null, data);
 }
+
+module.exports.postAnswer = async function(params, callback) {
+  const data = await sql`
+    insert into answers
+      (id_questions, body, date_written, answerer_name, answerer_email)
+      values
+      (${params.question_id}, ${params.body}, ${params.date_written}, ${params.answerer_name}, ${params.answerer_email})
+  `;
+  callback(null, data);
+}

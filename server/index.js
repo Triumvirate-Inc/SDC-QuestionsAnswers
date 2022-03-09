@@ -108,7 +108,7 @@ app.post('/shopdata/qa/questions', (req, res) => {
 // POST AN ANSWER
 app.post('/shopdata/qa/answers', (req, res) => {
   const params = {
-    id_questions: req.body.question_id,
+    question_id: req.body.question_id,
     body: req.body.body,
     date_written: Date.parse(new Date()),
     answerer_name: req.body.answerer_name,

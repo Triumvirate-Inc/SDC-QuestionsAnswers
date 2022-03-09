@@ -8,6 +8,8 @@ copy answers from '/Users/doug/Hackreactor/SDC-csvData/answers.csv' with delimit
 copy photos from '/Users/doug/Hackreactor/SDC-csvData/answers_photos.csv' with delimiter ',' csv header;
 
 
+select setval('questions_id_seq', (select max(id) from questions));
+
 
 
 BENJUE
