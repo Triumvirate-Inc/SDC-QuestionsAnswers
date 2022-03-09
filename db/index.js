@@ -9,48 +9,89 @@ const postgres = require('postgres');
 
 const sql = postgres();
 
+const product21 = [
+  {
+      "id": 80,
+      "product_id": 21,
+      "body": "Placeat eius culpa.",
+      "date_written": 1603994511263,
+      "asker_name": "Gail_Brown13",
+      "asker_email": "Jamey_Emard13@yahoo.com",
+      "reported": false,
+      "helpful": 3,
+      "answers": [
+          {
+              "id": 158,
+              "id_questions": 80,
+              "body": "Et ut dolor assumenda suscipit ea molestiae.",
+              "date_written": 1607396954952,
+              "answerer_name": "Mavis27",
+              "answerer_email": "Syble_Mosciski79@hotmail.com",
+              "reported": false,
+              "helpful": 10,
+              "photos": []
+          },
+          {
+              "id": 159,
+              "id_questions": 80,
+              "body": "Quia qui accusantium omnis dolores recusandae tempore fugit.",
+              "date_written": 1617035294090,
+              "answerer_name": "Jamal59",
+              "answerer_email": "Seller",
+              "reported": false,
+              "helpful": 11,
+              "photos": [
+                  {
+                      "id": 33,
+                      "id_answers": 159,
+                      "url": "https://images.unsplash.com/photo-1544376664-80b17f09d399?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1525&q=80"
+                  }
+              ]
+          }
+      ]
+  },
+  {
+      "id": 81,
+      "product_id": 21,
+      "body": "Sit deleniti dolorem suscipit voluptatem.",
+      "date_written": 1614855953231,
+      "asker_name": "Albert96",
+      "asker_email": "Elian35@hotmail.com",
+      "reported": false,
+      "helpful": 14,
+      "answers": []
+  }
+]
+
 // const question_fields = `questions.id, questions.product_id, questions.body, questions.date_written, questions.asker_name, questions.asker_email, questions.reported, questions.helpful`;
 
 // const answer_fields = 'answers.id, answers.id_questions, answers.body, answers.date_written, answers.answerer_name, answers.answerer_email, answers.reported, answers.helpful';
 
-module.exports.getQuestions = async function(params, callback) {
+module.exports.getQuestions = async function(params) {
   const limit = params.limit || 5;
   const page = params.page || 1;
-  const data = await sql`
-  select * from questions where
-    product_id = ${params.product_id}
+  return await sql`
+    select * from questions
+    where product_id in (${ params.product_ids })
     and not reported
-    limit ${limit} offset ${(page - 1) * limit}
   `;
-  // callback(null, data);
-  return data;
 }
 
-
-module.exports.getAnswers = async function(params, callback) {
+module.exports.getAnswers = async function(params) {
   const limit = params.limit || 5;
   const page = params.page || 1;
-  const data = await sql`
-  select * from answers where
-    id_questions = ${params.question_id}
+  return await sql`
+    select * from answers
+    where id_questions in (${ params.question_ids })
     and not reported
-    limit ${limit} offset ${(page - 1) * limit}
   `;
-  // console.log('here', data);
-  // callback(null, data);
-  return data;
 }
 
-module.exports.getPhotos = async function(params, callback) {
-  // const limit = params.limit || 5;
-  // const page = params.page || 1;
-  const data = await sql`
-  select * from photos where
-    id_answers = ${params.answer_id}
+module.exports.getPhotos = async function(params) {
+  return await sql`
+    select * from photos
+    where id_answers in (${ params.answer_ids })
   `;
-  // console.log('here', data);
-  // callback(null, data);
-  return data;
 }
 
 module.exports.putQuestionHelpful = async function(params, callback) {

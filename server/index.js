@@ -14,30 +14,53 @@ const sendResponse = function(err, data, res) {
     res.status(200).send(data);
 }
 
+function groupOnProperty (array, property) {
+  result = {};
+  array.forEach( (entry) => {
+      if(!result[entry[property]]) {
+          result[entry[property]] = [];
+      }
+      result[entry[property]].push(entry);
+  })
+  return result;
+}
+
+function arrangeQuestionData (questions, answers, photos) {
+  let answer_pool = groupOnProperty(answers, 'id_questions');
+  let photo_pool = groupOnProperty(photos, 'id_answers');
+
+  answers.forEach((a) => a.photos = photo_pool[a.id] || []);
+  questions.forEach((q) => q.answers = answer_pool[q.id] || []);
+  return questions;
+}
+
+function arrangeAnswerData (answers, photos) {
+  let photo_pool = groupOnProperty(photos, 'id_answers');
+
+  answers.forEach((a) => a.photos = photo_pool[a.id] || []);
+  return answers;
+}
+
 // GET QUESTIONS
 app.get('/shopdata/qa/questions', async (req, res) => {
-  let params = { product_id: req.query.product_id };
-  let questions = await db.getQuestions(params);
+  let product_ids = [ req.query.product_id ];
 
+  let questions = await db.getQuestions({ product_ids });
+  let answers = await db.getAnswers({ question_ids: questions.map((q)=>q.id) });
+  let photos = await db.getPhotos({ answer_ids: answers.map((a)=>a.id)});
 
-  for(let i = 0; i < questions.length; i++) {
-    questions[i].answers =
-      await db.getAnswers({ question_id: questions[i].id, limit: 2 });
-      for(let j = 0; j < questions[i].answers.length; j++) {
-        questions[i].answers[j].photos =
-          await db.getPhotos({ answer_id: questions[i].answers[j].id });
-      }
-  }
-  res.send(questions);
+  res.send(arrangeQuestionData(questions, answers, photos));
 });
 
 
 // GET ANSWERS
 app.get('/shopdata/qa/answers', async (req, res) => {
-  const params = { question_id: req.query.question_id };
-  // db.getAnswers(params,
-  //   (err, data) => sendResponse(err, data, res));
-  sendResponse(null, await db.getAnswers(params), res);
+  let question_ids = [ req.query.question_id ];
+
+  let answers = await db.getAnswers({ question_ids });
+  let photos = await db.getPhotos({ answer_ids: answers.map((a)=>a.id)});
+
+  res.send(arrangeAnswerData(answers, photos));
 });
 
 // MARK QUESTION AS HELPFUL
