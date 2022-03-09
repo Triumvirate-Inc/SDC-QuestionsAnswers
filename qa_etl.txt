@@ -10,20 +10,3 @@ copy photos from '/Users/doug/Hackreactor/SDC-csvData/answers_photos.csv' with d
 
 select setval('questions_id_seq', (select max(id) from questions));
 
-
-
-BENJUE
-Work ethic is fantastic, and always available as a resource for challenging problems.
-
-GLORIA
-Good pair, encouraging, deliberate learner, consistent effort, conveys confidence
-
-JUSTIN
-Open book, really relatable and interpersonally comfortable.
-
-OWEN
-Intellectual curiosity!!  Thoughtful, and pushes me to do better.
-
-
-
-I've been in therapy before for anxiety/depression.  I've had it well managed with medication and better cognitive awareness for the last few years.  I'm at a time of very elevated stress in my life, and am noticing some slipping back into old patterns of thought and behavior.  I'm a ruminator, I have a general preference for stasis and consistency in my life, and I'm in a place where I'm experiencing a lot of change.  My partner and I are planning a wedding, which breeds some family conflict and difficulty, and pushes on my difficulty in planning.  I am in the middle of a career change from audio engineering (coolest job in the world) to software development (hopefully cool, ideally sustainable).  I'm seeking out therapy particularly because of recently feeling tremendously frustrated and angry about a relationship conflict that I didn't know how to handle effectively.
