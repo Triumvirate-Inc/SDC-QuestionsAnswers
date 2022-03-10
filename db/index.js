@@ -1,9 +1,9 @@
+// const url = 54.163.190.145;
+
+// const options = { host: url, port: 5432, path: '/tmp', database: 'postgres', username: 'doug', password: 'temp, };
+
 const postgres = require('postgres');
 const sql = postgres();
-
-// const question_fields = `questions.id, questions.product_id, questions.body, questions.date_written, questions.asker_name, questions.asker_email, questions.reported, questions.helpful`;
-
-// const answer_fields = 'answers.id, answers.id_questions, answers.body, answers.date_written, answers.answerer_name, answers.answerer_email, answers.reported, answers.helpful';
 
 module.exports.getQuestionsForProduct = async function(params) {
   // const limit = params.limit || 5;
@@ -125,3 +125,7 @@ module.exports.postQuestion = async function(params) {
 //   `;
 //   callback(null, data);
 // }
+
+// const question_fields = `questions.id, questions.product_id, questions.body, questions.date_written, questions.asker_name, questions.asker_email, questions.reported, questions.helpful`;
+
+// const answer_fields = 'answers.id, answers.id_questions, answers.body, answers.date_written, answers.answerer_name, answers.answerer_email, answers.reported, answers.helpful';
