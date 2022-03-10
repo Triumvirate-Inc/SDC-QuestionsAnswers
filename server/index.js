@@ -4,7 +4,7 @@ const db = require('../db/index.js');
 const utils = require('./utils.js');
 
 const app = express();
-const PORT = 3000 || process.env.PORT;
+const PORT = 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ extended: true }));
