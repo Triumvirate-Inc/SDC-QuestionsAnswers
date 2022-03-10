@@ -1,4 +1,9 @@
 
+
+
+
+backlog of commands:
+
 here's the commands used to load the data into my schema
 
 \i ~/Hackreactor/SDC-QuestionsAnswers/schema.sql
@@ -7,3 +12,5 @@ copy questions from '/Users/doug/Hackreactor/SDC-csvData/questions.csv' with del
 copy answers from '/Users/doug/Hackreactor/SDC-csvData/answers.csv' with delimiter ',' csv header;
 copy photos from '/Users/doug/Hackreactor/SDC-csvData/answers_photos.csv' with delimiter ',' csv header;
 
+
+select setval('questions_id_seq', (select max(id) from questions));
