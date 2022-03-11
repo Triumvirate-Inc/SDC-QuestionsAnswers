@@ -2,9 +2,10 @@ const express = require('express');
 const axios = require('axios');
 const db = require('../db/index.js');
 const utils = require('./utils.js');
+const _settings = require('../_settings.js');
 
 const app = express();
-const PORT = 3000;
+const PORT = _settings.serverPort;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ extended: true }));

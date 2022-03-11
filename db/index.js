@@ -1,9 +1,7 @@
-// const url = 54.163.190.145;
-
-// const options = { host: url, port: 5432, path: '/tmp', database: 'postgres', username: 'doug', password: 'temp, };
-
+const _settings = require('../_settings.js');
 const postgres = require('postgres');
-const sql = postgres();
+const sql = postgres(_settings.options);
+// const sql = postgres();
 
 module.exports.getQuestionsForProduct = async function(params) {
   // const limit = params.limit || 5;
