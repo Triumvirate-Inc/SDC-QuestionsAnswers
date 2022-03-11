@@ -7,3 +7,5 @@ module.exports.serverPort = 3000;
 module.exports.dbOptions = {
 //  host: url,  port: 5432, path: '/tmp', username: 'doug',
 }
+
+module.exports.loaderio_key = '';
