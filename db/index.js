@@ -1,6 +1,6 @@
 const _settings = require('../_settings.js');
 const postgres = require('postgres');
-const sql = postgres(_settings.options);
+const sql = postgres(_settings.dbOptions);
 // const sql = postgres();
 
 module.exports.getQuestionsForProduct = async function(params) {
