@@ -38,7 +38,7 @@ app.post('/shopdata/qa/questions', (req, res) => {
     asker_email: req.body.asker_email,
    }
   db.postQuestion(params)
-    .then(() => utils.sendResponse(err, data, res))
+    .then((data) => utils.sendResponse(null, data, res))
     .catch((err) => utils.sendResponse(err, null, res));
 
 });
