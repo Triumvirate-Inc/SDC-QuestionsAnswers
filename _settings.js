@@ -14,4 +14,4 @@ module.exports.dbOptions = {
   password: password,
 }
 
-module.exports.loaderio_key = '';
+module.exports.loaderio_key = 'loaderio-cd6d692830bff893604c5e6bda52e5aa';

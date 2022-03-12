@@ -10,7 +10,7 @@ const PORT = _settings.serverPort;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ extended: true }));
 
-app.get(_settings.loaderio_key, (req, res) => { res.send(_settings.loaderio_key); });
+app.get(`/${_settings.loaderio_key}`, (req, res) => { res.send(_settings.loaderio_key); });
 
 // GET QUESTIONS
 app.get('/shopdata/qa/questions', (req, res) => {
