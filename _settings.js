@@ -1,5 +1,5 @@
 const password = require('./config.js');
-const url = '54.198.95.19';
+const url = '3.84.242.0';
 
 module.exports.hostUrl = url;
 
